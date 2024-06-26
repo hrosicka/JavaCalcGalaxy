@@ -2,7 +2,7 @@ import java.text.DecimalFormat;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Calculator {
+public class StarterCalculator {
 
     /**
      * Main entry point for the calculator application.
