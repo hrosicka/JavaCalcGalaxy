@@ -83,7 +83,7 @@ public class SwingCalculator extends JFrame {
 		operatorComboBox = new JComboBox<>();
         operatorComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"+", "-", "*", "/", "^"}));
 		
-		resultLabel = new JLabel("0");
+		resultLabel = new JLabel("0.0");
 
 		// Add components to the grid
 		topPanel.add(number1Spinner);
@@ -94,8 +94,8 @@ public class SwingCalculator extends JFrame {
 
 		// Create the second FlowLayout panel
 		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 20)); // Center-aligned with 5px spacing
-	
+		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 40));
+
 		JButton btnCalculate = new JButton("Calculate");
 		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -136,6 +136,7 @@ public class SwingCalculator extends JFrame {
 			}
 		});
 		// Add the calculate button to the bottom panel
+		btnCalculate.setPreferredSize(new Dimension(100, 60));
 		bottomPanel.add(btnCalculate);
 
 		// Add the panels to the main panel
@@ -144,6 +145,13 @@ public class SwingCalculator extends JFrame {
 	
 		// Set the main panel as the content pane
 		setContentPane(mainPanel);
+
+		// tootips
+		number1Spinner.setToolTipText("Enter the first operand here.");
+		number2Spinner.setToolTipText("Enter the second operand here.");
+		operatorComboBox.setToolTipText("Select the mathematical operation.");
+		resultLabel.setToolTipText("The calculated result will be displayed here.");
+		btnCalculate.setToolTipText("Click to perform the calculation.");
 	}
 
 	/**
