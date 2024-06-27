@@ -1,4 +1,4 @@
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -6,12 +6,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JButton;
-import java.awt.Dimension;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import net.miginfocom.swing.MigLayout;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -68,10 +66,10 @@ public class SwingCalculator extends JFrame {
 	 */
 	public SwingCalculator() {
 		setTitle("Calculator");
-		setSize(new Dimension(100, 50));
+		setSize(new Dimension(600, 450));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -81,16 +79,15 @@ public class SwingCalculator extends JFrame {
 		operatorComboBox = new JComboBox<>();
         operatorComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"+", "-", "*", "/", "^"}));
 		
-		JLabel lblNewLabel1 = new JLabel("=");
-		
 		resultLabel = new JLabel("0");
 
-		contentPane.setLayout(new MigLayout("", "[97px][97px][97px][8px][46px][77px]", "[251px][]"));
-		contentPane.add(number1Spinner, "cell 0 0,growx,aligny center");
-		contentPane.add(operatorComboBox, "cell 1 0,growx,aligny center");
-		contentPane.add(number2Spinner, "flowy,cell 2 0,growx,aligny center");
-		contentPane.add(lblNewLabel1, "cell 3 0,alignx center,aligny center");
-		contentPane.add(resultLabel, "cell 4 0,alignx left,aligny center");
+		contentPane.setLayout(new FlowLayout());
+		// Add components to the grid
+		contentPane.add(number1Spinner);
+		contentPane.add(operatorComboBox);
+		contentPane.add(number2Spinner);
+		contentPane.add(new JLabel("="));
+		contentPane.add(resultLabel);
 		
 		JButton btnCalculate = new JButton("Calculate");
 		btnCalculate.addActionListener(new ActionListener() {
@@ -131,7 +128,7 @@ public class SwingCalculator extends JFrame {
 				
 			}
 		});
-		contentPane.add(btnCalculate, "cell 2 1,alignx left,aligny center");
+		contentPane.add(btnCalculate);
 	}
 
 	/**
