@@ -2,7 +2,6 @@ import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JButton;
@@ -20,7 +19,6 @@ public class SwingCalculator extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	private final JSpinner number1Spinner;
     private final JSpinner number2Spinner;
     private final JComboBox<String> operatorComboBox;
@@ -66,13 +64,19 @@ public class SwingCalculator extends JFrame {
 	 */
 	public SwingCalculator() {
 		setTitle("Calculator");
-		setSize(new Dimension(600, 450));
+		setSize(new Dimension(500, 280));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 450);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		setBounds(100, 100, 500, 280);
+
+
+		// Create a main panel to hold the two FlowLayouts
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout()); // Use BorderLayout for vertical arrangement
+	
+		// Create the first FlowLayout panel
+		JPanel topPanel = new JPanel();
+		topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 60)); // Center-aligned with 5px spacing
 		
         number1Spinner = getSpinner();
 		number2Spinner = getSpinner();
@@ -81,14 +85,17 @@ public class SwingCalculator extends JFrame {
 		
 		resultLabel = new JLabel("0");
 
-		contentPane.setLayout(new FlowLayout());
 		// Add components to the grid
-		contentPane.add(number1Spinner);
-		contentPane.add(operatorComboBox);
-		contentPane.add(number2Spinner);
-		contentPane.add(new JLabel("="));
-		contentPane.add(resultLabel);
-		
+		topPanel.add(number1Spinner);
+		topPanel.add(operatorComboBox);
+		topPanel.add(number2Spinner);
+		topPanel.add(new JLabel("="));
+		topPanel.add(resultLabel);
+
+		// Create the second FlowLayout panel
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 20)); // Center-aligned with 5px spacing
+	
 		JButton btnCalculate = new JButton("Calculate");
 		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -128,7 +135,15 @@ public class SwingCalculator extends JFrame {
 				
 			}
 		});
-		contentPane.add(btnCalculate);
+		// Add the calculate button to the bottom panel
+		bottomPanel.add(btnCalculate);
+
+		// Add the panels to the main panel
+		mainPanel.add(topPanel, BorderLayout.NORTH);
+		mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+	
+		// Set the main panel as the content pane
+		setContentPane(mainPanel);
 	}
 
 	/**
