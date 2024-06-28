@@ -30,20 +30,20 @@ public class SwingCalculator extends JFrame {
 	public static void main(String[] args) {
 		
 		try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SwingCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (ClassNotFoundException ex) {
+			java.util.logging.Logger.getLogger(SwingCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SwingCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(SwingCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SwingCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SwingCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(SwingCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+			java.util.logging.Logger.getLogger(SwingCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -78,10 +78,10 @@ public class SwingCalculator extends JFrame {
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 60)); // Center-aligned with 5px spacing
 		
-        number1Spinner = getSpinner();
+		number1Spinner = getSpinner();
 		number2Spinner = getSpinner();
 		operatorComboBox = new JComboBox<>();
-        operatorComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"+", "-", "*", "/", "^"}));
+		operatorComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"+", "-", "*", "/", "^"}));
 		
 		resultLabel = new JLabel("0.0");
 
@@ -107,36 +107,35 @@ public class SwingCalculator extends JFrame {
 			private void calculateButtonPressed(ActionEvent evt) {
 				
 				String operation = String.valueOf(operatorComboBox.getSelectedItem());
-		        double number1 = (Double)number1Spinner.getValue();
-		        double number2 = (Double)number2Spinner.getValue();
-		        double result = 0;
-
-		        // výpočet
-		        if (operation.equals("+"))
-		                result = number1 + number2;
-		        else if (operation.equals("-"))
-		                result = number1 - number2;
+				double number1 = (Double)number1Spinner.getValue();
+				double number2 = (Double)number2Spinner.getValue();
+				double result = 0;
+				
+				if (operation.equals("+"))
+					result = number1 + number2;
+				else if (operation.equals("-"))
+					result = number1 - number2;
 		        else if (operation.equals("*"))
-		                result = number1 * number2;
-		        else if (operation.equals("/"))
+					result = number1 * number2;
+				else if (operation.equals("/"))
 		        {
-		                if (number2 != 0)
-		                        result = number1 / number2;
-		                else
-		                {
-		                        result = 0;
-		                        JOptionPane.showMessageDialog(null, "Nulou nelze dělit");
-		                }
-		        }
-		        else if (operation.equals("^"))
-		        		result = Math.pow(number1, number2);
-		        
+					if (number2 != 0)
+						result = number1 / number2;
+					else
+					{
+						result = 0;
+						JOptionPane.showMessageDialog(null, "Division by zero is not allowed!");
+					}
+				}
+				else if (operation.equals("^"))
+					result = Math.pow(number1, number2);
+
 				resultLabel.setText(String.valueOf(result));
 				
 			}
 		});
 		// Add the calculate button to the bottom panel
-		btnCalculate.setPreferredSize(new Dimension(100, 60));
+		btnCalculate.setPreferredSize(new Dimension(100, 40));
 		bottomPanel.add(btnCalculate);
 
 		// Add the panels to the main panel
