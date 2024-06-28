@@ -87,34 +87,26 @@ public class SwingCalculator extends JFrame {
 	 *
 	 * @return The JSpinner component.
 	 */
-	private JSpinner getSpinner() {
-		// Set reasonable default values for the spinner:
-		double minValue = -10000.0;  // Adjusted minimum value
-		double initialValue = 0.0;   // Adjusted initial value
-		double maxValue = 10000.0;   // Adjusted maximum value
-		double stepSize = 0.1;      // Adjusted step size
-
-		// Consider customizing these values based on your specific requirements.
-
-		// Create a SpinnerNumberModel using the defined values:
+	private JSpinner getSpinner(double minValue, double initialValue, double maxValue, double stepSize) {
+		// Create a SpinnerNumberModel using the provided values:
 		SpinnerNumberModel model = new SpinnerNumberModel(initialValue, minValue, maxValue, stepSize);
-
+	  
 		// Create a JSpinner using the model:
 		JSpinner operandSpinner = new JSpinner(model);
-
+	  
 		// Optionally customize the JSpinner's appearance (e.g., editor format):
 		operandSpinner.setEditor(new JSpinner.NumberEditor(operandSpinner, "#,###0.000")); // Example format
-
+	  
 		return operandSpinner;
-	}
+	  }
 
 	private JPanel createTopPanel() {
 		// Create the first FlowLayout panel
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 60)); // Center-aligned with 5px spacing
 		
-		number1Spinner = getSpinner();
-		number2Spinner = getSpinner();
+		number1Spinner = getSpinner(-10000.0, 0.0, 10000.0, 0.1);
+		number2Spinner = getSpinner(-10000.0, 0.0, 10000.0, 0.1);
 		operatorComboBox = new JComboBox<>();
 		operatorComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"+", "-", "*", "/", "^"}));
 		
