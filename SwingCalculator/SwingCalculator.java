@@ -3,7 +3,9 @@ import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -22,7 +24,7 @@ public class SwingCalculator extends JFrame {
 	private final JSpinner number1Spinner;
     private final JSpinner number2Spinner;
     private final JComboBox<String> operatorComboBox;
-    private final JLabel resultLabel;
+    private final JTextField resultField;
 
 	/**
 	 * Launch the application.
@@ -83,14 +85,16 @@ public class SwingCalculator extends JFrame {
 		operatorComboBox = new JComboBox<>();
 		operatorComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"+", "-", "*", "/", "^"}));
 		
-		resultLabel = new JLabel("0.0");
+		resultField = new JTextField("0.0", 10); // Set width for better display
+		resultField.setEditable(false); // Make it non-editable
+		resultField.setHorizontalAlignment(SwingConstants.RIGHT); // Right alignment
 
 		// Add components to the grid
 		topPanel.add(number1Spinner);
 		topPanel.add(operatorComboBox);
 		topPanel.add(number2Spinner);
 		topPanel.add(new JLabel("="));
-		topPanel.add(resultLabel);
+		topPanel.add(resultField);
 
 		// Create the second FlowLayout panel
 		JPanel bottomPanel = new JPanel();
@@ -130,7 +134,7 @@ public class SwingCalculator extends JFrame {
 				else if (operation.equals("^"))
 					result = Math.pow(number1, number2);
 
-				resultLabel.setText(String.valueOf(result));
+				resultField.setText(String.valueOf(result));
 				
 			}
 		});
@@ -149,7 +153,7 @@ public class SwingCalculator extends JFrame {
 		number1Spinner.setToolTipText("Enter the first operand here.");
 		number2Spinner.setToolTipText("Enter the second operand here.");
 		operatorComboBox.setToolTipText("Select the mathematical operation.");
-		resultLabel.setToolTipText("The calculated result will be displayed here.");
+		resultField.setToolTipText("The calculated result will be displayed here.");
 		btnCalculate.setToolTipText("Click to perform the calculation.");
 	}
 
@@ -174,7 +178,7 @@ public class SwingCalculator extends JFrame {
 		JSpinner operandSpinner = new JSpinner(model);
 
 		// Optionally customize the JSpinner's appearance (e.g., editor format):
-		operandSpinner.setEditor(new JSpinner.NumberEditor(operandSpinner, "#,##0.00")); // Example format
+		operandSpinner.setEditor(new JSpinner.NumberEditor(operandSpinner, "#,###0.000")); // Example format
 
 		return operandSpinner;
 	}
