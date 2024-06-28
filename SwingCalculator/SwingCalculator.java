@@ -151,37 +151,20 @@ public class SwingCalculator extends JFrame {
 			}
 
 			private void calculateButtonPressed(ActionEvent evt) {
-				
 				String operation = String.valueOf(operatorComboBox.getSelectedItem());
-				double number1 = (Double)number1Spinner.getValue();
-				double number2 = (Double)number2Spinner.getValue();
-				double result = 0.0;
-
-				// Use the Calculator object to perform the chosen operation
-				// and display the result with clean formatting.
-				DecimalFormat df = new DecimalFormat("#.###");
-				
-				if (operation.equals("+"))
-					result = number1 + number2;
-				else if (operation.equals("-"))
-					result = number1 - number2;
-				else if (operation.equals("*"))
-					result = number1 * number2;
-				else if (operation.equals("/"))
-				{
-					if (number2 != 0)
-						result = number1 / number2;
-					else
-					{
-						result = 0;
-						JOptionPane.showMessageDialog(null, "Division by zero is not allowed!");
-					}
+				double number1 = (Double) number1Spinner.getValue();
+				double number2 = (Double) number2Spinner.getValue();
+			  
+				double result;
+				if (operation.equals("/") && number2 == 0) {
+					JOptionPane.showMessageDialog(null, "Division by zero is not allowed!");
+					result = 0; // Set a default value (optional)
+				} else {
+					result = calculate(number1, operation, number2);
 				}
-				else if (operation.equals("^"))
-					result = Math.pow(number1, number2);
-
-				resultField.setText(String.valueOf(df.format(result)));
-				
+			  
+				DecimalFormat df = new DecimalFormat("#.###");
+				resultField.setText(df.format(result));
 			}
 		});
 		// Add the calculate button to the bottom panel
@@ -194,16 +177,28 @@ public class SwingCalculator extends JFrame {
 		return bottomPanel;
 	}
 
-	private double calculate(double number1, String operation, double number2) {
+	private double calculate(double number1, String operation, double number2) throws ArithmeticException {
+		if (operation.equals("/") && number2 == 0) {
+		  throw new ArithmeticException("Division by zero is not allowed!");
+		}
+	  
 		double result = 0.0;
 		switch (operation) {
-		  case "+":
-			result = number1 + number2;
-			break;
-		  case "-":
-			result = number1 - number2;
-			break;
-		  // ... similar cases for other operations
+			case "+":
+				result = number1 + number2;
+				break;
+			case "-":
+				result = number1 - number2;
+				break;
+			case "*":
+				result = number1 * number2;
+				break;
+			case "/":
+				result = number1 / number2;
+				break;
+			case "^":
+				result = Math.pow(number1, number2);
+				break;
 		}
 		return result;
 	  }
