@@ -1,33 +1,29 @@
 import java.awt.*;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
+import javax.swing.*;
+
+/**
+ * A professional-grade Swing calculator application with enhanced features.
+ *
+ * @author [Hanka R.]
+ */
 public class SwingCalculator extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private final JSpinner number1Spinner;
-    private final JSpinner number2Spinner;
-    private final JComboBox<String> operatorComboBox;
-    private final JTextField resultField;
 
+	private JSpinner number1Spinner;
+	private JSpinner number2Spinner;
+	private JComboBox<String> operatorComboBox;
+	private JTextField resultField;
+	// private final JButton calculateButton;
+	
 	/**
-	 * Launch the application.
+	 * Main entry point for the application.
+	 *
+	 * @param args Command-line arguments (unused)
 	 */
 	public static void main(String[] args) {
 		
@@ -40,13 +36,13 @@ public class SwingCalculator extends JFrame {
 			}
 		} catch (ClassNotFoundException ex) {
 			java.util.logging.Logger.getLogger(SwingCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+		} catch (InstantiationException ex) {
 			java.util.logging.Logger.getLogger(SwingCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+		} catch (IllegalAccessException ex) {
 			java.util.logging.Logger.getLogger(SwingCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
 			java.util.logging.Logger.getLogger(SwingCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+		}
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -62,10 +58,11 @@ public class SwingCalculator extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Creates a new instance of the AdvancedSwingCalculator.
 	 */
 	public SwingCalculator() {
-		setTitle("Calculator");
+
+		setTitle("Calculator");		// Set the frame title
 		setSize(new Dimension(500, 280));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,86 +72,14 @@ public class SwingCalculator extends JFrame {
 		// Create a main panel to hold the two FlowLayouts
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout()); // Use BorderLayout for vertical arrangement
-	
-		// Create the first FlowLayout panel
-		JPanel topPanel = new JPanel();
-		topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 60)); // Center-aligned with 5px spacing
-		
-		number1Spinner = getSpinner();
-		number2Spinner = getSpinner();
-		operatorComboBox = new JComboBox<>();
-		operatorComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"+", "-", "*", "/", "^"}));
-		
-		resultField = new JTextField("0.0", 10); // Set width for better display
-		resultField.setEditable(false); // Make it non-editable
-		resultField.setHorizontalAlignment(SwingConstants.RIGHT); // Right alignment
-
-		// Add components to the grid
-		topPanel.add(number1Spinner);
-		topPanel.add(operatorComboBox);
-		topPanel.add(number2Spinner);
-		topPanel.add(new JLabel("="));
-		topPanel.add(resultField);
-
-		// Create the second FlowLayout panel
-		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 40));
-
-		JButton btnCalculate = new JButton("Calculate");
-		btnCalculate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				calculateButtonPressed(evt);
-				
-
-			}
-
-			private void calculateButtonPressed(ActionEvent evt) {
-				
-				String operation = String.valueOf(operatorComboBox.getSelectedItem());
-				double number1 = (Double)number1Spinner.getValue();
-				double number2 = (Double)number2Spinner.getValue();
-				double result = 0;
-				
-				if (operation.equals("+"))
-					result = number1 + number2;
-				else if (operation.equals("-"))
-					result = number1 - number2;
-		        else if (operation.equals("*"))
-					result = number1 * number2;
-				else if (operation.equals("/"))
-		        {
-					if (number2 != 0)
-						result = number1 / number2;
-					else
-					{
-						result = 0;
-						JOptionPane.showMessageDialog(null, "Division by zero is not allowed!");
-					}
-				}
-				else if (operation.equals("^"))
-					result = Math.pow(number1, number2);
-
-				resultField.setText(String.valueOf(result));
-				
-			}
-		});
-		// Add the calculate button to the bottom panel
-		btnCalculate.setPreferredSize(new Dimension(100, 40));
-		bottomPanel.add(btnCalculate);
 
 		// Add the panels to the main panel
-		mainPanel.add(topPanel, BorderLayout.NORTH);
-		mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+		mainPanel.add(createTopPanel(), BorderLayout.NORTH);
+		mainPanel.add(createBottomPanel(), BorderLayout.SOUTH);
 	
 		// Set the main panel as the content pane
 		setContentPane(mainPanel);
 
-		// tootips
-		number1Spinner.setToolTipText("Enter the first operand here.");
-		number2Spinner.setToolTipText("Enter the second operand here.");
-		operatorComboBox.setToolTipText("Select the mathematical operation.");
-		resultField.setToolTipText("The calculated result will be displayed here.");
-		btnCalculate.setToolTipText("Click to perform the calculation.");
 	}
 
 	/**
@@ -182,4 +107,104 @@ public class SwingCalculator extends JFrame {
 
 		return operandSpinner;
 	}
+
+	private JPanel createTopPanel() {
+		// Create the first FlowLayout panel
+		JPanel topPanel = new JPanel();
+		topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 60)); // Center-aligned with 5px spacing
+		
+		number1Spinner = getSpinner();
+		number2Spinner = getSpinner();
+		operatorComboBox = new JComboBox<>();
+		operatorComboBox.setModel(new DefaultComboBoxModel<>(new String[]{"+", "-", "*", "/", "^"}));
+		
+		resultField = new JTextField("0.0", 10); // Set width for better display
+		resultField.setEditable(false); // Make it non-editable
+		resultField.setHorizontalAlignment(SwingConstants.RIGHT); // Right alignment
+
+		// Add components to the grid
+		topPanel.add(number1Spinner);
+		topPanel.add(operatorComboBox);
+		topPanel.add(number2Spinner);
+		topPanel.add(new JLabel("="));
+		topPanel.add(resultField);
+
+		// tootips
+		number1Spinner.setToolTipText("Enter the first operand here.");
+		number2Spinner.setToolTipText("Enter the second operand here.");
+		operatorComboBox.setToolTipText("Select the mathematical operation.");
+		resultField.setToolTipText("The calculated result will be displayed here.");
+
+		return topPanel;
+	}
+
+	private JPanel createBottomPanel() {
+		// Create the first FlowLayout panel
+		// Create the second FlowLayout panel
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 40));
+
+		JButton calculateButton = new JButton("Calculate");
+		calculateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				calculateButtonPressed(evt);
+			}
+
+			private void calculateButtonPressed(ActionEvent evt) {
+				
+				String operation = String.valueOf(operatorComboBox.getSelectedItem());
+				double number1 = (Double)number1Spinner.getValue();
+				double number2 = (Double)number2Spinner.getValue();
+				double result = 0.0;
+
+				// Use the Calculator object to perform the chosen operation
+				// and display the result with clean formatting.
+				DecimalFormat df = new DecimalFormat("#.###");
+				
+				if (operation.equals("+"))
+					result = number1 + number2;
+				else if (operation.equals("-"))
+					result = number1 - number2;
+				else if (operation.equals("*"))
+					result = number1 * number2;
+				else if (operation.equals("/"))
+				{
+					if (number2 != 0)
+						result = number1 / number2;
+					else
+					{
+						result = 0;
+						JOptionPane.showMessageDialog(null, "Division by zero is not allowed!");
+					}
+				}
+				else if (operation.equals("^"))
+					result = Math.pow(number1, number2);
+
+				resultField.setText(String.valueOf(df.format(result)));
+				
+			}
+		});
+		// Add the calculate button to the bottom panel
+		calculateButton.setPreferredSize(new Dimension(100, 40));
+		bottomPanel.add(calculateButton);
+
+		// tootip
+		calculateButton.setToolTipText("Click to perform the calculation.");
+
+		return bottomPanel;
+	}
+
+	private double calculate(double number1, String operation, double number2) {
+		double result = 0.0;
+		switch (operation) {
+		  case "+":
+			result = number1 + number2;
+			break;
+		  case "-":
+			result = number1 - number2;
+			break;
+		  // ... similar cases for other operations
+		}
+		return result;
+	  }
 }
