@@ -19,6 +19,24 @@ Looking for a fun and practical way to learn Java programming? This repository i
 Overall, this code demonstrates a well-structured and functional console calculator with a focus on user experience through clear prompts and robust error handling.
 This code provides a solid foundation for building more advanced calculator functionalities in the future.
 
+## [**EasyCalculator: Interactive Command-Line Calculator with Custom Error Handling**](https://github.com/hrosicka/JavaCalcGalaxy/tree/master/EasyCalculator)
+
+- This code implements a user-friendly Command-Line Calculator for basic arithmetic operations.
+- It offers a clear and interactive experience through its text-based interface.
+
+### Key Features:
+
+- **Modular design:** Utilizes a separate Calculator class to encapsulate calculation logic, promoting code reusability.
+- **Custom error handling:** Defines a CalculatorError class specifically for division by zero exceptions, providing informative error messages.
+- **User-friendly menu:** Guides the user with a clear menu displaying available operations and exit option.
+- **Robust input validation:** Ensures user enters valid numbers (double) using a do-while loop and exception handling (InputMismatchException).
+- **Formatted output:** Displays results using DecimalFormat for readability, rounding to 3 decimal places.
+- **Resource management:** Explicitly closes the Scanner object to release resources.
+  
+Overall, this code demonstrates a well-structured and interactive console calculator with a focus on user experience through clear prompts, robust error handling, and a custom error class.
+
+This code builds upon the previous example by introducing a modular design with a dedicated Calculator class and a custom error class for division by zero, showcasing more advanced object-oriented programming concepts.
+
 
 ## [**Professional-Grade Swing Calculator with User-Friendly Interface**](https://github.com/hrosicka/JavaCalcGalaxy/tree/master/SwingCalculator)
 
