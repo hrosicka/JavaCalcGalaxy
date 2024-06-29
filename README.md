@@ -2,6 +2,24 @@
 
 Looking for a fun and practical way to learn Java programming? This repository is for you! It contains a collection of simple Java calculators designed to help you grasp the fundamentals of Java programming. Experiment with the code, try out different operations and functions, and learn how to create your own simple programs.
 
+## [**Basic Command-Line Calculator with Error Handling**](https://github.com/hrosicka/JavaCalcGalaxy/tree/master/StarterCalculator)
+
+- This code implements a simple calculator application that operates through the command line.
+- It offers basic functionalities for addition, subtraction, multiplication, and division.
+
+### Key Features:
+
+- **Text-based interface:** User interacts with the calculator through standard input/output streams.
+- **Robust input validation:** Ensures user enters valid numbers (float) using a do-while loop and exception handling (InputMismatchException).
+- **Clear prompts and messages:** Guides the user with informative messages for input and potential errors.
+- **Error handling:** Prevents division by zero errors with a informative error message (ArithmeticException).
+- **Formatted output:** Displays results using DecimalFormat for readability, rounding to 3 decimal places.
+- **Resource management:** Explicitly closes the Scanner object to release resources.
+  
+Overall, this code demonstrates a well-structured and functional console calculator with a focus on user experience through clear prompts and robust error handling.
+This code provides a solid foundation for building more advanced calculator functionalities in the future.
+
+
 ## [**Professional-Grade Swing Calculator with User-Friendly Interface**](https://github.com/hrosicka/JavaCalcGalaxy/tree/master/SwingCalculator)
 
 - This code implements a feature-rich calculator application using Java's Swing library. 
