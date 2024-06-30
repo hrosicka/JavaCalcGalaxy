@@ -59,8 +59,8 @@ public class SwingCalculator extends JFrame {
 	}
 
 	/**
-     * Creates a new instance of the SwingCalculator.
-     */
+	/* Creates a new instance of the SwingCalculator.
+	/*/
 	public SwingCalculator() {
 
 		setTitle("Calculator");		// Set the frame title
@@ -83,14 +83,14 @@ public class SwingCalculator extends JFrame {
 	}
 
 	/**
-     * Creates a JSpinner component for numeric input with a specified value range and step size.
-     *
-     * @param minValue The minimum allowed value
-     * @param initialValue The initial value displayed
-     * @param maxValue The maximum allowed value
-     * @param stepSize The increment for each spinner step
-     * @return The JSpinner component
-     */
+	/* Creates a JSpinner component for numeric input with a specified value range and step size.
+	/*
+	/* @param minValue The minimum allowed value
+	/* @param initialValue The initial value displayed
+	/* @param maxValue The maximum allowed value
+	/* @param stepSize The increment for each spinner step
+	/* @return The JSpinner component
+	/*/
 	private JSpinner getSpinner(double minValue, double initialValue, double maxValue, double stepSize) {
 		// Create a SpinnerNumberModel using the provided values:
 		SpinnerNumberModel model = new SpinnerNumberModel(initialValue, minValue, maxValue, stepSize);
@@ -105,10 +105,10 @@ public class SwingCalculator extends JFrame {
 	  }
 
 	/**
-     * Creates and initializes the top panel containing input fields.
-     *
-     * @return The top panel with UI components.
-     */
+	/* Creates and initializes the top panel containing input fields.
+	/*
+	/* @return The top panel with UI components.
+	/*/
 	private JPanel createTopPanel() {
 		// Create the first FlowLayout panel
 		JPanel topPanel = new JPanel();
@@ -144,10 +144,10 @@ public class SwingCalculator extends JFrame {
 	}
 
 	/**
-     * Creates and initializes the bottom panel containing the calculate button.
-     *
-     * @return The bottom panel with the calculate button.
-     */
+	/* Creates and initializes the bottom panel containing the calculate button.
+	/*
+	/* @return The bottom panel with the calculate button.
+	/*/
 	private JPanel createBottomPanel() {
 		// Create the first FlowLayout panel
 		// Create the second FlowLayout panel
@@ -189,15 +189,15 @@ public class SwingCalculator extends JFrame {
 	}
 
 	/**
-     * Performs the calculation based on the provided operands and operation.
-     *
-     * @param number1 The first operand
-     * @param operation The mathematical operation (+, -, *, /, ^)
-     * @param number2 The second operand
-     * @return The calculated result
-     * @throws ArithmeticException If an invalid operation or division by zero occurs
-     */
-	private double calculate(double number1, String operation, double number2) throws ArithmeticException {
+	 * Performs the calculation based on the provided operands and operation.
+	 *
+	 * @param number1 The first operand
+	 * @param operation The mathematical operation (+, -, *, /, ^)
+	 * @param number2 The second operand
+	 * @return The calculated result
+	 * @throws ArithmeticException If an invalid operation or division by zero occurs
+	 */
+	public double calculate(double number1, String operation, double number2) throws ArithmeticException {
 		switch (operation) {
 			case "+":
 				return add(number1, number2);
@@ -215,46 +215,46 @@ public class SwingCalculator extends JFrame {
 	}
 
 	/**
-     * Performs the addition operation.
-     *
-     * @param number1 The first operand
-     * @param number2 The second operand
-     * @return The sum of the operands
-     */
+	 * Performs the addition operation.
+	 *
+	 * @param number1 The first operand
+	 * @param number2 The second operand
+	 * @return The sum of the operands
+	 */
 	private double add(double number1, double number2) {
 		return number1 + number2;
 	}
 
 	/**
-     * Performs the subtraction operation.
-     *
-     * @param number1 The first operand
-     * @param number2 The second operand
-     * @return The difference of the operands
-     */
+	 * Performs the subtraction operation.
+	 *
+	 * @param number1 The first operand
+	 * @param number2 The second operand
+	 * @return The difference of the operands
+	 */
 	private double subtract(double number1, double number2) {
 		return number1 - number2;
 	}
 
 	/**
-     * Performs the multiplication operation.
-     *
-     * @param number1 The first operand
-     * @param number2 The second operand
-     * @return The product of the operands
-     */
+	 * Performs the multiplication operation.
+	 *
+	 * @param number1 The first operand
+	 * @param number2 The second operand
+	 * @return The product of the operands
+	 */
 	private double multiply(double number1, double number2) {
 		return number1 * number2;
 	}
 	
 	/**
-     * Performs the division operation.
-     *
-     * @param number1 The first operand (numerator)
-     * @param number2 The second operand (denominator)
-     * @return The quotient of the operands
-     * @throws ArithmeticException If the denominator is zero
-     */
+	 * Performs the division operation.
+	 *
+	 * @param number1 The first operand (numerator)
+	 * @param number2 The second operand (denominator)
+	 * @return The quotient of the operands
+	 * @throws ArithmeticException If the denominator is zero
+	 */
 	private double divide(double number1, double number2) throws ArithmeticException {
 		if (number2 == 0) {
 			throw new ArithmeticException("Division by zero is not allowed!");
