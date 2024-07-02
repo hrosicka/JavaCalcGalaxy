@@ -61,3 +61,16 @@ This code builds upon the previous example by introducing a modular design with 
 - **Customizable appearance:** Allows for easy modification of visual elements like button size and text field formatting.
   
 Overall, this code demonstrates a well-structured and functional Swing calculator application with a focus on user experience and error handling.
+
+### Comprehensive Test Coverage for SwingCalculator:
+
+This test suite utilizes JUnit 5, the latest generation of the JUnit testing framework, to thoroughly validate the functionality of the SwingCalculator class.
+
+#### Detailed Test Coverage:
+
+- Addition (+)
+- Subtraction (-)
+- Multiplication (*) with both positive and negative numbers
+- Division (/) handling zero division by throwing an ArithmeticException
+- Exponentiation (^) including negative exponents
+- Empty input handling for both operands using NumberFormatException
