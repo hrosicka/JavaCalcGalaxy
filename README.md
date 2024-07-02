@@ -43,12 +43,19 @@ This code builds upon the previous example by introducing a modular design with 
 - This code implements a feature-rich calculator application using Java's Swing library. 
 - It offers a well-designed graphical user interface (GUI) for a smooth user experience.
 
+  ![](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/SwingCalculator/doc/Calculator1.png)
+  
 ### Key Features:
 
 - **User-friendly input:** Utilizes JSpinners for convenient numeric input with customizable formatting (e.g., supporting decimals).
 - **Operator selection:** Provides a JComboBox for selecting various mathematical operations, including addition, subtraction, multiplication, division, and exponentiation.
 - **Clear display:** Displays the calculated result in a dedicated JTextField with right-alignment for better readability.
 - **Error handling:** Prevents division by zero errors with a informative message dialog.
+  
+  ![](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/SwingCalculator/doc/ZeroDiv.png)
+  
+  ![](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/SwingCalculator/doc/ZeroDivMessageBox.png)
+  
 - **Detailed tooltips:** Offers informative tooltips for each component, guiding users on their functionalities.
 - **Organized layout:** Employs FlowLayout and BorderLayout for a clean and intuitive layout.
 - **Customizable appearance:** Allows for easy modification of visual elements like button size and text field formatting.
