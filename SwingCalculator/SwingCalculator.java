@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 
 import javax.swing.*;
@@ -144,47 +143,30 @@ public class SwingCalculator extends JFrame {
 	}
 
 	/**
-	/* Creates and initializes the bottom panel containing the calculate button.
-	/*
-	/* @return The bottom panel with the calculate button.
-	/*/
+	 * Creates and initializes the bottom panel containing the calculate button and a new clear button.
+	 * 
+	 * @return The bottom panel with the calculate and clear buttons.
+	 */
 	private JPanel createBottomPanel() {
-		// Create the first FlowLayout panel
-		// Create the second FlowLayout panel
-		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 40));
-
+		// Create the bottom panel with centered alignment and spacing
+		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 40));
+	  
+		// Create and configure the calculate button
 		calculateButton = new JButton("Calculate");
-		calculateButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				calculateButtonPressed(evt);
-			}
-
-			private void calculateButtonPressed(ActionEvent evt) {
-				String operation = String.valueOf(operatorComboBox.getSelectedItem());
-				double number1 = (Double) number1Spinner.getValue();
-				double number2 = (Double) number2Spinner.getValue();
-			  
-				double result;
-				if (operation.equals("/") && number2 == 0) {
-					JOptionPane.showMessageDialog(null, "Division by zero is not allowed!");
-					result = 0; // Set a default value (optional)
-				} else {
-					result = calculate(number1, operation, number2);
-				}
-			  
-				DecimalFormat df = new DecimalFormat("#.###");
-				resultField.setText(df.format(result));
-			}
-		});
-
-		// Add the calculate button to the bottom panel
+		calculateButton.addActionListener(this::calculateButtonPressed); // Use method reference for cleaner syntax
 		calculateButton.setPreferredSize(new Dimension(100, 40));
-		bottomPanel.add(calculateButton);
-
-		// Add tooltip for the calculate button
 		calculateButton.setToolTipText("Click to perform the calculation.");
+	  
+		// Create and configure the clear button
+		JButton clearButton = new JButton("Clear");
+		clearButton.addActionListener(this::clearButtonClicked); // Assuming a clearButtonClicked method exists
+		clearButton.setPreferredSize(new Dimension(100, 40));
+		clearButton.setToolTipText("Reset all inputs and result to default values."); // Add tooltip text
 
+		// Add buttons to the panel
+		bottomPanel.add(calculateButton);
+		bottomPanel.add(clearButton);
+	  
 		return bottomPanel;
 	}
 
@@ -260,5 +242,49 @@ public class SwingCalculator extends JFrame {
 			throw new ArithmeticException("Division by zero is not allowed!");
 		}
 		return number1 / number2;
+	}
+
+	/**
+	 * Resets the calculator's UI elements to their default values.
+	 * 
+	 * This method is called when the "Clear" button is clicked. It performs the following actions:
+	 *  - Sets the value of the number1Spinner to 0.0.
+	 *  - Sets the value of the number2Spinner to 0.0.
+	 *  - Selects the first item (usually "+") in the operatorComboBox.
+	 *  - Sets the text of the resultField to "0.0".
+	 */
+	private void clearButtonClicked(ActionEvent evt) {
+		number1Spinner.setValue(0.0); // Set default value for number1
+		number2Spinner.setValue(0.0); // Set default value for number2
+		operatorComboBox.setSelectedIndex(0); // Select the first item (usually "+")
+		resultField.setText("0.0"); // Set default result text
+	}
+
+	/**
+	 * Performs the calculation based on the user input and displays the result.
+	 * 
+	 * This method is called when the "Calculate" button is clicked. It performs the following actions:
+	 *  - Gets the selected operation from the operatorComboBox.
+	 *  - Retrieves the values from the number1Spinner and number2Spinner as doubles.
+	 *  - Checks for division by zero if the operation is division.
+	 *      - If division by zero, displays an error message and optionally sets a default result.
+	 *      - Otherwise, calls the `calculate` method to perform the actual calculation.
+	 *  - Formats the result using a DecimalFormat and sets the text of the resultField.
+	 */
+	private void calculateButtonPressed(ActionEvent evt) {
+		String operation = String.valueOf(operatorComboBox.getSelectedItem());
+		double number1 = (Double) number1Spinner.getValue();
+		double number2 = (Double) number2Spinner.getValue();
+	  
+		double result;
+		if (operation.equals("/") && number2 == 0) {
+			JOptionPane.showMessageDialog(null, "Division by zero is not allowed!");
+			result = 0; // Set a default value (optional)
+		} else {
+			result = calculate(number1, operation, number2);
+		}
+	  
+		DecimalFormat df = new DecimalFormat("#.###");
+		resultField.setText(df.format(result));
 	}
 }
