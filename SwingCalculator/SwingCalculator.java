@@ -68,6 +68,10 @@ public class SwingCalculator extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 280);
 
+		// Set the icon image (using the ImageIcon approach)
+		ImageIcon icon = new ImageIcon(SwingCalculator.class.getResource("/resources/calc_icon.png"));
+		setIconImage(icon.getImage());
+
 		// Create a main panel with BorderLayout for vertical layout
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
