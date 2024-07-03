@@ -28,7 +28,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         // Nastavení barev - After setting Look and Feel
         UIManager.getLookAndFeelDefaults().put("Button[Enabled].backgroundPainter", new ButtonPainter(Color.RED, Color.WHITE));
 
-        setTitle("Kalkulačka BMI");
+        setTitle("BMI Calculator");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
 
@@ -41,16 +41,17 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         classificationLabel = new JLabel();
 
         // Vytvoření tlačítka pro výpočet
-        calculateButton = new JButton("Vypočítat");
+        calculateButton = new JButton("Calculate");
         calculateButton.addActionListener(this);
 
         // Uspořádání komponent GUI
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.insets = new Insets(10, 20, 10, 20); // Padding around components
 
         constraints.gridx = 0;
         constraints.gridy = 0;
-        add(new JLabel("Výška (cm):"), constraints);
+        add(new JLabel("Height (cm):"), constraints);
 
         constraints.gridx = 1;
         constraints.gridy = 0;
@@ -58,7 +59,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
 
         constraints.gridx = 0;
         constraints.gridy = 1;
-        add(new JLabel("Váha (kg):"), constraints);
+        add(new JLabel("Weight (kg):"), constraints);
 
         constraints.gridx = 1;
         constraints.gridy = 1;
@@ -77,7 +78,19 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         constraints.gridwidth = 2;
         add(calculateButton, constraints);
 
-        
+        // Set insets for padding around text fields
+        Insets insets = new Insets(3, 5, 3, 5); // Adjust top, left, bottom, right padding as desired
+
+        heightField.setMargin(insets);
+        weightField.setMargin(insets);
+        calculateButton.setMargin(insets);
+    
+
+        // Center the window on the screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = getSize();
+        setLocation((screenSize.width - frameSize.width) / 2,
+                (screenSize.height - frameSize.height) / 2);
 
         pack();
         setVisible(true);
@@ -120,7 +133,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
             String classification = calculator.classifyBMI(bmi);
 
             bmiLabel.setText("BMI: " + String.format("%.2f", bmi));
-            classificationLabel.setText("Klasifikace: " + classification);
+            classificationLabel.setText("Classification: " + classification);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Neplatná výška nebo váha. Zadejte čísla.",
                     "Chyba", JOptionPane.ERROR_MESSAGE);
