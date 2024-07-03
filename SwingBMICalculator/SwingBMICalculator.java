@@ -11,6 +11,23 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
     private JButton calculateButton;
 
     public SwingBMICalculator() {
+
+        // Set Nimbus Look and Feel
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            // Handle potential exceptions if Nimbus is not available
+            e.printStackTrace();
+        }
+        
+        // Nastavení barev - After setting Look and Feel
+        UIManager.getLookAndFeelDefaults().put("Button[Enabled].backgroundPainter", new ButtonPainter(Color.RED, Color.WHITE));
+
         setTitle("Kalkulačka BMI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
@@ -60,8 +77,36 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         constraints.gridwidth = 2;
         add(calculateButton, constraints);
 
+        
+
         pack();
         setVisible(true);
+    }
+
+    public class ButtonPainter implements Painter {
+
+        private Color light, dark;
+        private GradientPaint gradPaint;
+
+        public ButtonPainter(Color light, Color dark) {
+            this.light = light;
+            this.dark = dark;
+        }
+
+        @Override
+        public void paint(Graphics2D g, Object c, int w, int h) {
+            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            int arcWidth = 5; // Adjust this value to control corner roundness
+            int arcHeight = 5;
+
+            gradPaint = new GradientPaint((w / 2.0f), 0, light, (w / 2.0f), (h / 2.0f), dark, true);
+            g.setPaint(gradPaint);
+
+            // Draw rounded rectangle with gradient fill (and thick border for outline)
+            g.setStroke(new BasicStroke(3)); // Adjust stroke width as needed
+            g.fillRoundRect(2, 2, w - 5, h - 5, arcWidth, arcHeight);
+        }
     }
 
     @Override
