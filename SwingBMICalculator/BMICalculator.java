@@ -1,3 +1,6 @@
+/**
+ * Class responsible for calculating Body Mass Index (BMI) and classifying it based on standard weight-to-height ratios.
+ */
 public class BMICalculator {
 
     /**
@@ -17,9 +20,10 @@ public class BMICalculator {
 
     /**
      * Calculates the Body Mass Index (BMI) based on the provided weight and height.
+     * BMI is calculated by dividing weight in kilograms by the square of height in meters.
      *
-     * @param weight The weight in kilograms (kg).
-     * @param height The height in centimeters (cm).
+     * @param weight The weight of the person in kilograms (kg).
+     * @param height The height of the person in centimeters (cm).
      * @return The calculated BMI value.
      * @throws IllegalArgumentException if either weight or height is not a positive number.
      */
@@ -32,14 +36,14 @@ public class BMICalculator {
     }
 
     /**
-     * Classifies a given BMI value into one of the following categories:
-     *  - Underweight
-     *  - Normal weight
-     *  - Overweight
-     *  - Obese
+     * Classifies a given BMI value into one of the following categories based on standard weight-to-height ratios:
+     *  - Underweight (BMI < 18.5)
+     *  - Normal weight (18.5 <= BMI < 25)
+     *  - Overweight (25 <= BMI < 30)
+     *  - Obese (BMI >= 30)
      *
      * @param bmi The Body Mass Index value.
-     * @return The classification based on the provided BMI value.
+     * @return The classification category based on the provided BMI value.
      */
     public String classifyBMI(double bmi) {
         if (bmi < UNDERWEIGHT_THRESHOLD) {
