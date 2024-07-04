@@ -14,6 +14,9 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
     private JLabel classificationLabel;
     private JButton calculateButton;
 
+    // Create a BMI calculator object
+    BMICalculator calculator = new BMICalculator();
+
     public SwingBMICalculator() {
 
         // Set Nimbus Look and Feel
@@ -115,7 +118,6 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
                 (screenSize.height - frameSize.height) / 2);
 
         pack();
-        setVisible(true);
     }
 
     @SuppressWarnings("rawtypes")
@@ -152,9 +154,6 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
             double height = Double.parseDouble(heightField.getText());
             double weight = Double.parseDouble(weightField.getText());
 
-            // Create a BMI calculator object
-            BMICalculator calculator = new BMICalculator();
-
             // Calculate the BMI and classification
             double bmi = calculator.calculateBMI(weight, height);
             String classification = calculator.classifyBMI(bmi);
@@ -170,6 +169,6 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new SwingBMICalculator());
+        SwingUtilities.invokeLater(() -> new SwingBMICalculator().setVisible(true));
     }
 }
