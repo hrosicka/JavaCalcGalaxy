@@ -118,6 +118,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    @SuppressWarnings("rawtypes")
     public class ButtonPainter implements Painter {
 
         private Color light, dark;
@@ -147,18 +148,24 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
+            // Parse the weight and height values from the text fields
             double height = Double.parseDouble(heightField.getText());
             double weight = Double.parseDouble(weightField.getText());
 
+            // Create a BMI calculator object
             BMICalculator calculator = new BMICalculator();
+
+            // Calculate the BMI and classification
             double bmi = calculator.calculateBMI(weight, height);
             String classification = calculator.classifyBMI(bmi);
 
+            // Update the BMI and classification labels
             bmiLabel.setText("BMI: " + String.format("%.2f", bmi));
             classificationLabel.setText("Classification: " + classification);
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Neplatná výška nebo váha. Zadejte čísla.",
-                    "Chyba", JOptionPane.ERROR_MESSAGE);
+            // Handle invalid input (non-numeric values)
+            JOptionPane.showMessageDialog(this, "Invalid height or weight. Please enter numbers.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
