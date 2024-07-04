@@ -88,33 +88,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
 
         pack();
     }
-// Custom class for painting buttons with a gradient effect
-    @SuppressWarnings("rawtypes")
-    public class ButtonPainter implements Painter {
-
-        private Color light, dark;
-        private GradientPaint gradPaint;
-
-        public ButtonPainter(Color light, Color dark) {
-            this.light = light;
-            this.dark = dark;
-        }
-
-        @Override
-        public void paint(Graphics2D g, Object c, int w, int h) {
-            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-            int arcWidth = 7; // Adjust this value to control corner roundness
-            int arcHeight = 7;
-
-            gradPaint = new GradientPaint((w / 8.0f), 0, light, (w / 3.0f), (h / 1.0f), dark, true);
-            g.setPaint(gradPaint);
-
-            // Draw rounded rectangle with gradient fill
-            g.setStroke(new BasicStroke(3)); // Adjust stroke width as needed
-            g.fillRoundRect(2, 2, w - 5, h - 5, arcWidth, arcHeight);
-        }
-    }
+    
     // Handles the "Calculate" button click event
     @Override
     public void actionPerformed(ActionEvent e) {
