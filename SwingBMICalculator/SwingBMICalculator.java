@@ -31,7 +31,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
     // Constructor to initialize the application window
     public SwingBMICalculator() {
 
-        // Set Nimbus Look and Feel
+        // Set Nimbus Look and Feel (if available)
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -40,8 +40,8 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            // Handle potential exceptions if Nimbus is not available
-            e.printStackTrace();
+            // Log or display a user-friendly message if Nimbus is not available
+            System.err.println("Failed to set Nimbus Look and Feel: " + e.getMessage());
         }
         
         getContentPane().setBackground(BACKGROUND_COLOR);
@@ -55,19 +55,15 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
 
-        // Vytvoření polí pro zadání výšky a váhy
+        // Create UI components
         heightField = new JTextField(15);
         weightField = new JTextField(15);
-
-        // Vytvoření štítků pro zobrazení BMI a klasifikace
         bmiLabel = new JLabel("BMI:");
         classificationLabel = new JLabel();
-
-        // Vytvoření tlačítka pro výpočet
         calculateButton = new JButton("Calculate");
         calculateButton.addActionListener(this);
 
-
+        // Add components to the layout with consistent formatting
         addComponent(new JLabel("Height (cm):"), 0, 0);
         addComponent(heightField, 1, 0);
 
@@ -78,7 +74,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
 
         addComponent(classificationLabel, 1, 2);
 
-        addComponent(calculateButton, 0, 3, 2);
+        addComponent(calculateButton, 0, 3, 2); // Spans two columns
 
         // Center the window on the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -88,7 +84,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
 
         pack();
     }
-    
+
     // Handles the "Calculate" button click event
     @Override
     public void actionPerformed(ActionEvent e) {
