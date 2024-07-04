@@ -5,6 +5,10 @@ import java.awt.event.*;
 // Swing application that calculates Body Mass Index (BMI)
 public class SwingBMICalculator extends JFrame implements ActionListener {
 
+    // Define application-wide constants (improve readability and maintainability)
+    private static final int TEXTFIELD_WIDTH = 150;
+    private static final int TEXTFIELD_HEIGHT = 30;
+
     // Define colors used in the application
     private static final Color BACKGROUND_COLOR = new Color(240, 244, 249);
     private static final Color BUTTON_COLOR = new Color(198, 140, 226);
@@ -46,6 +50,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         
         getContentPane().setBackground(BACKGROUND_COLOR);
 
+        // Customize button and text field appearance using ButtonPainter
         UIManager.getLookAndFeelDefaults().put("Button[Enabled].backgroundPainter", new ButtonPainter(BUTTON_COLOR, BACKGROUND_COLOR));
         UIManager.getLookAndFeelDefaults().put("Button[Focused].backgroundPainter", new ButtonPainter(BUTTON_COLOR, BACKGROUND_COLOR));
         UIManager.getLookAndFeelDefaults().put("TextField[Enabled].backgroundPainter", new ButtonPainter(TEXTFIELD_COLOR, TEXTFIELD_COLOR));
@@ -55,9 +60,11 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
 
-        // Create UI components
+        // Create UI components with clear descriptions
         heightField = new JTextField(15);
+        heightField.setToolTipText("Enter your height in centimeters (cm)."); // Set informative tooltip
         weightField = new JTextField(15);
+        weightField.setToolTipText("Enter your weight in kilograms (kg).");
         bmiLabel = new JLabel("BMI:");
         classificationLabel = new JLabel();
         calculateButton = new JButton("Calculate");
@@ -93,9 +100,18 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
             double height = Double.parseDouble(heightField.getText());
             double weight = Double.parseDouble(weightField.getText());
 
+            if (height <= 0 || weight <= 0) {
+                JOptionPane.showMessageDialog(this, "Height and weight must be positive values.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                return;  // Exit the method if values are not positive
+            }
+
             // Calculate the BMI and classification
             double bmi = calculator.calculateBMI(weight, height);
             String classification = calculator.classifyBMI(bmi);
+
+            // Set tooltip based on classification
+            setTooltipBasedOnClassification(classification);
 
             // Update the BMI and classification labels
             bmiLabel.setText("BMI: " + String.format("%.2f", bmi));
@@ -124,7 +140,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         constraints.insets = COMPONENT_INSETS;
         constraints.gridx = gridX;
         constraints.gridy = gridY;
-        textField.setPreferredSize(new Dimension(150, 30));
+        textField.setPreferredSize(new Dimension(TEXTFIELD_WIDTH, TEXTFIELD_HEIGHT));
         textField.setHorizontalAlignment(SwingConstants.RIGHT);
         textField.setMargin(TEXTFIELD_INSETS);
         textField.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10), textField.getBorder()));
@@ -140,6 +156,25 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         constraints.gridy = gridY;
         constraints.gridwidth = 2;
         add(button, constraints);
+    }
+
+    private void setTooltipBasedOnClassification(String classification) {
+        switch (classification) {
+            case "Underweight":
+                classificationLabel.setToolTipText("BMI below the healthy weight range.");
+                break;
+            case "Normal weight":
+                classificationLabel.setToolTipText("BMI within the healthy weight range.");
+                break;
+            case "Overweight":
+                classificationLabel.setToolTipText("BMI above the healthy weight range. Consider lifestyle changes to reduce BMI.");
+                break;
+            case "Obese":
+                classificationLabel.setToolTipText("Elevated BMI that may increase health risks.");
+                break;
+            default:
+                classificationLabel.setToolTipText("Unclassified BMI.");
+        }
     }
     
 
