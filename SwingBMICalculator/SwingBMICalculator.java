@@ -2,21 +2,33 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+// Swing application that calculates Body Mass Index (BMI)
 public class SwingBMICalculator extends JFrame implements ActionListener {
 
+    // Define colors used in the application
     private static final Color BACKGROUND_COLOR = new Color(240, 244, 249);
     private static final Color BUTTON_COLOR = new Color(198, 140, 226);
     private static final Color TEXTFIELD_COLOR = Color.WHITE;
 
+    // Define insets (padding) for components
+    private static final Insets COMPONENT_INSETS = new Insets(10, 20, 10, 20);
+    private static final Insets TEXTFIELD_INSETS = new Insets(2, 5, 2, 5);
+
+    // Text fields for user input (height and weight)
     private JTextField heightField;
     private JTextField weightField;
+
+    // Labels to display BMI and classification
     private JLabel bmiLabel;
     private JLabel classificationLabel;
+
+    // Button to trigger BMI calculation
     private JButton calculateButton;
 
-    // Create a BMI calculator object
+    // Instance of a separate BMI calculator class
     BMICalculator calculator = new BMICalculator();
 
+    // Constructor to initialize the application window
     public SwingBMICalculator() {
 
         // Set Nimbus Look and Feel
@@ -47,20 +59,6 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         heightField = new JTextField(15);
         weightField = new JTextField(15);
 
-        heightField.setPreferredSize(new Dimension(15, 30));
-        weightField.setPreferredSize(new Dimension(15, 30));
-
-        heightField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createEmptyBorder(0, 10, 0, 10), // Your custom insets
-            heightField.getBorder()));
-
-        weightField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createEmptyBorder(0, 10, 0, 10), // Your custom insets
-            weightField.getBorder()));
-
-        heightField.setHorizontalAlignment(SwingConstants.RIGHT); // Right alignment
-        weightField.setHorizontalAlignment(SwingConstants.RIGHT); // Right alignment
-
         // Vytvoření štítků pro zobrazení BMI a klasifikace
         bmiLabel = new JLabel("BMI:");
         classificationLabel = new JLabel();
@@ -69,47 +67,18 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         calculateButton = new JButton("Calculate");
         calculateButton.addActionListener(this);
 
-        // Uspořádání komponent GUI
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.insets = new Insets(10, 20, 10, 20); // Padding around components
 
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        add(new JLabel("Height (cm):"), constraints);
+        addComponent(new JLabel("Height (cm):"), 0, 0);
+        addComponent(heightField, 1, 0);
 
-        constraints.gridx = 1;
-        constraints.gridy = 0;
-        add(heightField, constraints);
+        addComponent(new JLabel("Weight (kg):"), 0, 1);
+        addComponent(weightField, 1, 1);
 
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        add(new JLabel("Weight (kg):"), constraints);
+        addComponent(bmiLabel, 0, 2);
 
-        constraints.gridx = 1;
-        constraints.gridy = 1;
-        add(weightField, constraints);
+        addComponent(classificationLabel, 1, 2);
 
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        add(bmiLabel, constraints);
-
-        constraints.gridx = 1;
-        constraints.gridy = 2;
-        add(classificationLabel, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy = 3;
-        constraints.gridwidth = 2;
-        add(calculateButton, constraints);
-
-        // Set insets for padding around text fields
-        Insets insets = new Insets(2, 5, 2, 5); // Adjust top, left, bottom, right padding as desired
-
-        heightField.setMargin(insets);
-        weightField.setMargin(insets);
-        calculateButton.setMargin(insets);
-    
+        addComponent(calculateButton, 0, 3, 2);
 
         // Center the window on the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -119,7 +88,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
 
         pack();
     }
-
+// Custom class for painting buttons with a gradient effect
     @SuppressWarnings("rawtypes")
     public class ButtonPainter implements Painter {
 
@@ -146,7 +115,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
             g.fillRoundRect(2, 2, w - 5, h - 5, arcWidth, arcHeight);
         }
     }
-
+    // Handles the "Calculate" button click event
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
@@ -167,6 +136,42 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    // Helper method to add components with basic GridBagLayout configuration (JLabel)
+    private void addComponent(JLabel label, int gridX, int gridY) {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.insets = COMPONENT_INSETS;
+        constraints.gridx = gridX;
+        constraints.gridy = gridY;
+        add(label, constraints);
+    }
+    
+    // Helper method to add components with basic GridBagLayout configuration and specific styling (JTextField)
+    private void addComponent(JTextField textField, int gridX, int gridY) {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.insets = COMPONENT_INSETS;
+        constraints.gridx = gridX;
+        constraints.gridy = gridY;
+        textField.setPreferredSize(new Dimension(150, 30));
+        textField.setHorizontalAlignment(SwingConstants.RIGHT);
+        textField.setMargin(TEXTFIELD_INSETS);
+        textField.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10), textField.getBorder()));
+        add(textField, constraints);
+    }
+
+    // Helper method to add components with basic GridBagLayout configuration and spanning multiple columns (JButton)
+    private void addComponent(JButton button, int gridX, int gridY, int gridwidth) {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.insets = COMPONENT_INSETS;
+        constraints.gridx = gridX;
+        constraints.gridy = gridY;
+        constraints.gridwidth = 2;
+        add(button, constraints);
+    }
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new SwingBMICalculator().setVisible(true));
