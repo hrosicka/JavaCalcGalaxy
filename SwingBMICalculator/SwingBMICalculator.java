@@ -4,6 +4,10 @@ import java.awt.event.*;
 
 public class SwingBMICalculator extends JFrame implements ActionListener {
 
+    private static final Color BACKGROUND_COLOR = new Color(240, 244, 249);
+    private static final Color BUTTON_COLOR = new Color(198, 140, 226);
+    private static final Color TEXTFIELD_COLOR = Color.WHITE;
+
     private JTextField heightField;
     private JTextField weightField;
     private JLabel bmiLabel;
@@ -25,16 +29,34 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
             e.printStackTrace();
         }
         
-        // Nastavení barev - After setting Look and Feel
-        UIManager.getLookAndFeelDefaults().put("Button[Enabled].backgroundPainter", new ButtonPainter(Color.RED, Color.WHITE));
+        getContentPane().setBackground(BACKGROUND_COLOR);
 
+        UIManager.getLookAndFeelDefaults().put("Button[Enabled].backgroundPainter", new ButtonPainter(BUTTON_COLOR, BACKGROUND_COLOR));
+        UIManager.getLookAndFeelDefaults().put("Button[Focused].backgroundPainter", new ButtonPainter(BUTTON_COLOR, BACKGROUND_COLOR));
+        UIManager.getLookAndFeelDefaults().put("TextField[Enabled].backgroundPainter", new ButtonPainter(TEXTFIELD_COLOR, TEXTFIELD_COLOR));
+        UIManager.put("TextField.border", BorderFactory.createLineBorder(TEXTFIELD_COLOR, 0));
+        
         setTitle("BMI Calculator");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
 
         // Vytvoření polí pro zadání výšky a váhy
-        heightField = new JTextField(10);
-        weightField = new JTextField(10);
+        heightField = new JTextField(15);
+        weightField = new JTextField(15);
+
+        heightField.setPreferredSize(new Dimension(15, 30));
+        weightField.setPreferredSize(new Dimension(15, 30));
+
+        heightField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createEmptyBorder(0, 10, 0, 10), // Your custom insets
+            heightField.getBorder()));
+
+        weightField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createEmptyBorder(0, 10, 0, 10), // Your custom insets
+            weightField.getBorder()));
+
+        heightField.setHorizontalAlignment(SwingConstants.RIGHT); // Right alignment
+        weightField.setHorizontalAlignment(SwingConstants.RIGHT); // Right alignment
 
         // Vytvoření štítků pro zobrazení BMI a klasifikace
         bmiLabel = new JLabel("BMI:");
@@ -79,7 +101,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         add(calculateButton, constraints);
 
         // Set insets for padding around text fields
-        Insets insets = new Insets(3, 5, 3, 5); // Adjust top, left, bottom, right padding as desired
+        Insets insets = new Insets(2, 5, 2, 5); // Adjust top, left, bottom, right padding as desired
 
         heightField.setMargin(insets);
         weightField.setMargin(insets);
@@ -110,13 +132,13 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         public void paint(Graphics2D g, Object c, int w, int h) {
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            int arcWidth = 5; // Adjust this value to control corner roundness
-            int arcHeight = 5;
+            int arcWidth = 7; // Adjust this value to control corner roundness
+            int arcHeight = 7;
 
-            gradPaint = new GradientPaint((w / 2.0f), 0, light, (w / 2.0f), (h / 2.0f), dark, true);
+            gradPaint = new GradientPaint((w / 8.0f), 0, light, (w / 3.0f), (h / 1.0f), dark, true);
             g.setPaint(gradPaint);
 
-            // Draw rounded rectangle with gradient fill (and thick border for outline)
+            // Draw rounded rectangle with gradient fill
             g.setStroke(new BasicStroke(3)); // Adjust stroke width as needed
             g.fillRoundRect(2, 2, w - 5, h - 5, arcWidth, arcHeight);
         }
@@ -129,7 +151,7 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
             double weight = Double.parseDouble(weightField.getText());
 
             BMICalculator calculator = new BMICalculator();
-            double bmi = calculator.calculateBMI(height, weight);
+            double bmi = calculator.calculateBMI(weight, height);
             String classification = calculator.classifyBMI(bmi);
 
             bmiLabel.setText("BMI: " + String.format("%.2f", bmi));
@@ -141,11 +163,6 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new SwingBMICalculator();
-            }
-        });
+        SwingUtilities.invokeLater(() -> new SwingBMICalculator());
     }
 }
