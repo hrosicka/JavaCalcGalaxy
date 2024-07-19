@@ -66,6 +66,10 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
 
+        // Set the desired fixed size for the window
+        setSize(new Dimension(500, 400));
+        setResizable(false);
+
         // Create UI components with clear descriptions
         heightField = new JTextField(15);
         heightField.setToolTipText("Enter your height in centimeters (cm)."); // Set informative tooltip
