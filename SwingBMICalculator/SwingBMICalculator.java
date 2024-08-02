@@ -5,6 +5,7 @@ import java.awt.event.*;
 /**
  * Swing application that calculates Body Mass Index (BMI) and displays the classification based on the calculated value.
  * This application provides a user-friendly interface with informative tooltips for each classification.
+ *  * @author [Hanka Robovska]
  */
 public class SwingBMICalculator extends JFrame implements ActionListener {
 
@@ -65,6 +66,10 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
         setTitle("BMI Calculator");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
+
+        // Set the icon image (using the ImageIcon approach)
+		ImageIcon icon = new ImageIcon(SwingCalculator.class.getResource("/resources/calc_icon.png"));
+		setIconImage(icon.getImage());
 
         // Set the desired fixed size for the window
         setSize(new Dimension(500, 400));
