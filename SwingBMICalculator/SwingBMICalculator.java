@@ -117,10 +117,11 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            // Parse the weight and height values from the text fields
-            double height = Double.parseDouble(heightField.getText());
-            double weight = Double.parseDouble(weightField.getText());
+            // Get height and weight values from text fields
+            double height = getInputValue(heightField);
+            double weight = getInputValue(weightField);
 
+            // Validate input values
             if (height <= 0 || weight <= 0) {
                 JOptionPane.showMessageDialog(this, "Height and weight must be positive values.",
                         "Error", JOptionPane.ERROR_MESSAGE);
@@ -131,17 +132,40 @@ public class SwingBMICalculator extends JFrame implements ActionListener {
             double bmi = calculator.calculateBMI(weight, height);
             String classification = calculator.classifyBMI(bmi);
 
+            // Update BMI and classification labels
+            updateLabels(bmi, classification);
+
             // Set tooltip based on classification
             setTooltipBasedOnClassification(classification);
 
-            // Update the BMI and classification labels
-            bmiLabel.setText("BMI: " + String.format("%.2f", bmi));
-            classificationLabel.setText("Classification: " + classification);
         } catch (NumberFormatException ex) {
             // Handle invalid input (non-numeric values)
             JOptionPane.showMessageDialog(this, "Invalid height or weight. Please enter numbers.",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    /**
+     * Parses the text from the given JTextField into a double value.
+     *
+     * @param textField The JTextField containing the text to be parsed.
+     * @return The parsed double value.
+     * @throws NumberFormatException If the text cannot be parsed as a double.
+     */
+    private double getInputValue(JTextField textField) {
+        return Double.parseDouble(textField.getText());
+    }
+
+    /**
+     * Updates the BMI and classification labels with the given values.
+     *
+     * @param bmi The calculated BMI value.
+     * @param classification The BMI classification.
+     */
+    private void updateLabels(double bmi, String classification) {
+        // Update the BMI and classification labels
+        bmiLabel.setText("BMI: " + String.format("%.2f", bmi));
+        classificationLabel.setText("Classification: " + classification);
     }
 
     /**
