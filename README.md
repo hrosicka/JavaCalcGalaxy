@@ -74,3 +74,17 @@ This test suite utilizes JUnit 5, the latest generation of the JUnit testing fra
 - Division (/) handling zero division by throwing an ArithmeticException
 - Exponentiation (^) including negative exponents
 - Empty input handling for both operands using NumberFormatException
+
+## [**BMI Calculator Application**](https://github.com/hrosicka/JavaCalcGalaxy/tree/master/SwingBMICalculator)
+
+- This Java Swing application calculates Body Mass Index (BMI) based on user-provided height and weight.
+- It displays the calculated BMI along with its corresponding classification (underweight, normal weight, overweight, obese).
+- This application is designed to be easy to use and provides valuable health information to the user.
+  
+### Key Features:
+
+- User-friendly graphical interface
+- Clear input fields for height and weight
+- Informative tooltips for BMI classifications
+- Accurate BMI calculation
+- Visual feedback with BMI and classification display
