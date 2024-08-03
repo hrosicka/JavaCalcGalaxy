@@ -81,6 +81,8 @@ This test suite utilizes JUnit 5, the latest generation of the JUnit testing fra
 - It displays the calculated BMI along with its corresponding classification (underweight, normal weight, overweight, obese).
 - This application is designed to be easy to use and provides valuable health information to the user.
   
+  ![](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/SwingBMICalculator/doc/BMICalculator.png)
+  
 ### Key Features:
 
 - User-friendly graphical interface
@@ -88,3 +90,8 @@ This test suite utilizes JUnit 5, the latest generation of the JUnit testing fra
 - Informative tooltips for BMI classifications
 - Accurate BMI calculation
 - Visual feedback with BMI and classification display
+
+  ![](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/SwingBMICalculator/doc/BMICalculatorUnderweight.png)
+  
+  ![](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/SwingBMICalculator/doc/Error.png)
+  
