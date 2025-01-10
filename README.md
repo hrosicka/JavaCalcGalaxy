@@ -1,4 +1,5 @@
-# JavaCalcGalaxy - Learn Java Programming with Simple Calculators!
+
+  ![](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/MainPicture.PNG)
 
 Looking for a fun and practical way to learn Java programming? This repository is for you! It contains a collection of simple Java calculators designed to help you grasp the fundamentals of Java programming. Experiment with the code, try out different operations and functions, and learn how to create your own simple programs.
 
