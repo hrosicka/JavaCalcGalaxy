@@ -1,7 +1,15 @@
 
   ![](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/MainPicture.PNG)
+  
+**Explore the universe of calculators and programming in Java!**
 
 Looking for a fun and practical way to learn Java programming? This repository is for you! It contains a collection of simple Java calculators designed to help you grasp the fundamentals of Java programming. Experiment with the code, try out different operations and functions, and learn how to create your own simple programs.
+
+## About This Project
+- 🥳 Perfect for beginners eager to learn programming.
+- 🌍 A great way to explore Java fundamentals while having fun.
+
+---
 
 ## [**Basic Command-Line Calculator with Error Handling**](https://github.com/hrosicka/JavaCalcGalaxy/tree/master/StarterCalculator)
 
@@ -19,6 +27,8 @@ Looking for a fun and practical way to learn Java programming? This repository i
   
 Overall, this code demonstrates a well-structured and functional console calculator with a focus on user experience through clear prompts and robust error handling.
 This code provides a solid foundation for building more advanced calculator functionalities in the future.
+
+---
 
 ## [**EasyCalculator: Interactive Command-Line Calculator with Custom Error Handling**](https://github.com/hrosicka/JavaCalcGalaxy/tree/master/EasyCalculator)
 
@@ -38,6 +48,7 @@ Overall, this code demonstrates a well-structured and interactive console calcul
 
 This code builds upon the previous example by introducing a modular design with a dedicated Calculator class and a custom error class for division by zero, showcasing more advanced object-oriented programming concepts.
 
+---
 
 ## [**Professional-Grade Swing Calculator with User-Friendly Interface**](https://github.com/hrosicka/JavaCalcGalaxy/tree/master/SwingCalculator)
 
@@ -76,6 +87,8 @@ This test suite utilizes JUnit 5, the latest generation of the JUnit testing fra
 - Exponentiation (^) including negative exponents
 - Empty input handling for both operands using NumberFormatException
 
+---
+
 ## [**BMI Calculator Application**](https://github.com/hrosicka/JavaCalcGalaxy/tree/master/SwingBMICalculator)
 
 - This Java Swing application calculates Body Mass Index (BMI) based on user-provided height and weight.
@@ -95,4 +108,9 @@ This test suite utilizes JUnit 5, the latest generation of the JUnit testing fra
   ![](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/SwingBMICalculator/doc/BMICalculatorUnderweight.png)
   
   ![](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/SwingBMICalculator/doc/Error.png)
+
+---
+
+### License
+This project is licensed under the MIT License – see the [LICENSE](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/LICENSE) file for details.
   
