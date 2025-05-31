@@ -3,6 +3,16 @@
   
 **Explore the universe of calculators and programming in Java!**
 
+![License](https://img.shields.io/github/license/hrosicka/JavaCalcGalaxy)
+![Java](https://img.shields.io/badge/language-Java-blue.svg)
+![GitHub stars](https://img.shields.io/github/stars/hrosicka/JavaCalcGalaxy?style=social)
+![GitHub forks](https://img.shields.io/github/forks/hrosicka/JavaCalcGalaxy?style=social)
+![GitHub issues](https://img.shields.io/github/issues/hrosicka/JavaCalcGalaxy)
+![GitHub last commit](https://img.shields.io/github/last-commit/hrosicka/JavaCalcGalaxy)
+![Repo size](https://img.shields.io/github/repo-size/hrosicka/JavaCalcGalaxy)
+![Contributors](https://img.shields.io/github/contributors/hrosicka/JavaCalcGalaxy)
+![Watchers](https://img.shields.io/github/watchers/hrosicka/JavaCalcGalaxy?style=social)
+
 Looking for a fun and practical way to learn Java programming? This repository is for you! It contains a collection of simple Java calculators designed to help you grasp the fundamentals of Java programming. Experiment with the code, try out different operations and functions, and learn how to create your own simple programs.
 
 ## About This Project
