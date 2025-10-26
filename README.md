@@ -106,6 +106,7 @@ This test suite utilizes JUnit 5, the latest generation of the JUnit testing fra
 - This application is designed to be easy to use and provides valuable health information to the user.
   
   ![](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/SwingBMICalculator/doc/BMICalculator.png)
+
   
 ### Key Features:
 
@@ -121,6 +122,13 @@ This test suite utilizes JUnit 5, the latest generation of the JUnit testing fra
 
 ---
 
-### License
+## Author
+
+Lovingly crafted by [Hanka Robovska](https://github.com/hrosicka) 👩‍🔬
+
+---
+
+## License
+
 This project is licensed under the MIT License – see the [LICENSE](https://github.com/hrosicka/JavaCalcGalaxy/blob/master/LICENSE) file for details.
   
